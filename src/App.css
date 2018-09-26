@@ -8,6 +8,10 @@ body, .app {
   background: white;
 }
 
+ul {
+  list-style: none;
+}
+
 /* main page */
 
 .list-books-title {

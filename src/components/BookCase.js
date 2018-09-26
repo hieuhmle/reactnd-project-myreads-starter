@@ -1,4 +1,5 @@
 import React from 'react'; 
+import Shelf from './Shelf';
 
 const BookCase = (props) => {
     const { books } = props;
@@ -15,8 +16,12 @@ const BookCase = (props) => {
 
     const renderShelves = () => {
         return shelves.map(shelf => (
-            <li key={shelf.id}></li>
-            // TODO: Add Shelf Component
+            <li key={shelf.id}>
+                <Shelf 
+                    title={shelf.title}
+                    books={filterBooksByShelf(shelf.id)}
+                />
+            </li>
         ));
     }
 
@@ -26,9 +31,9 @@ const BookCase = (props) => {
                 <h1>MyReads</h1>
             </div>
             <div className="list-books-content">
-                <ol>
-
-                </ol>
+                <ul>
+                    {renderShelves()}
+                </ul>
             </div>
             <div className="open-search">
               
