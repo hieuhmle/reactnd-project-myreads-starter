@@ -7,19 +7,16 @@ const BookSearch = (props) => {
 
     const renderBooks = () => {
         if (query.length) {
-            if (books.length) {
-                return books.map(book => (
-                    <li key={book.id}>
-                        <Book
-                            onShelfChange={(event, book) => onShelfChange(event, book)}
-                            book={book}
-                        />
-                    </li>
-                ));
-            }
-            else {
-                return <p className='no-book'>No Books To Show</p>
-            }
+            return books.map(book => (
+                <li key={book.id}>
+                    <Book
+                        onShelfChange={(event, book) => onShelfChange(event, book)}
+                        book={book}
+                    />
+                </li>
+            ));   
+        } else {
+            return <p className='no-book'>No Books To Show</p>
         }
     }
 
@@ -28,7 +25,7 @@ const BookSearch = (props) => {
             <div className="search-books-bar">
                 <Link className="close-search" to='/' onClick={() => setDefaultState()}>Close</Link>
                 <div className="search-books-input-wrapper">
-                    <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => onQueryChange(event)}/>
+                    <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => onQueryChange(event.target.value)}/>
                 </div>
             </div>
             <div className="search-books-results">

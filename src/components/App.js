@@ -32,21 +32,19 @@ class App extends Component {
             })
     }
 
-    onQueryChange (event) {
-        this.setState({query: event.target.value}, () => this.searchBooks(this.state.query));
+    onQueryChange (query) {
+        this.setState({query}, () => this.searchBooks(this.state.query));
     }
 
     searchBooks (query) {
         if (query.length) {
-            BooksAPI.search(query).then(books => this.setState({books}));
+            BooksAPI.search(query).then(books => books[0] ? this.setState(books) : this.setState({books: []}));
         } else {
             this.setState({books: []})
         }
     }
 
     render () {
-        // BooksAPI.getAll().then(books => console.log(books));
-        // BooksAPI.search('React').then(books => console.log(books));
         const { books, query } = this.state;
 
         return (

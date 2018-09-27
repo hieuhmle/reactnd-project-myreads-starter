@@ -3,7 +3,7 @@ import React from 'react';
 const Book = (props) => {
     const { onShelfChange, book} = props;
     const { title, authors, shelf } = book;
-    const thumbnail = book.imageLinks.thumbnail;
+    const thumbnail = book.imageLinks ? book.imageLinks.thumbnail : null;
 
     return (
         <div className="book">
