@@ -1,5 +1,6 @@
 import React from 'react'; 
 import Shelf from './Shelf';
+import { Link } from 'react-router-dom';
 
 const BookCase = (props) => {
     const { books, onChangeShelf } = props;
@@ -37,7 +38,7 @@ const BookCase = (props) => {
                 </ul>
             </div>
             <div className="open-search">
-              
+                <Link to='/search'></Link>
             </div>
         </div>
     );

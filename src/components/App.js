@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
+import * as BooksAPI from '../BooksAPI';
 import '../App.css';
 import BookCase from './BookCase';
-import * as BooksAPI from '../BooksAPI';
+import BookSearch from './BookSearch';
+
 
 class App extends Component {
     state = {
@@ -15,18 +18,23 @@ class App extends Component {
     onChangeShelf (event, book) {
         const newShelf = event.target.value;
         BooksAPI.update(book, newShelf)
-            .then(result => BooksAPI.getAll())
+            .then(() => BooksAPI.getAll())
             .then(books => this.setState({books}))
     }
 
     render () {
-        BooksAPI.getAll().then(books => console.log(books));
-        BooksAPI.search('React').then(books => console.log(books));
+        // BooksAPI.getAll().then(books => console.log(books));
+        // BooksAPI.search('React').then(books => console.log(books));
         const { books } = this.state;
 
         return (
             <div>
-                <BookCase books={books} onChangeShelf={(event, book) => this.onChangeShelf(event, book)}/>
+                <Route exact path='/' render={() => (
+                    <BookCase books={books} onChangeShelf={(event, book) => this.onChangeShelf(event, book)}/>
+                )}/>
+                <Route path='/search' render={() => (
+                    <BookSearch />
+                )}/> 
             </div>
         );
     }
