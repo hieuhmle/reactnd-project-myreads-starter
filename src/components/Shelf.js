@@ -2,14 +2,14 @@ import React from 'react';
 import Book from './Book';
 
 const Shelf = (props) => {
-    const { title, books, onChangeShelf } = props;
+    const { title, books, onShelfChange } = props;
 
     const renderBooks = () => {
         if (books.length) {
             return books.map(book => (
                 <li key={book.id}>
                     <Book
-                        onChangeShelf={(event, book) => onChangeShelf(event, book)}
+                        onShelfChange={(event, book) => onShelfChange(event, book)}
                         book={book}
                     />
                 </li>

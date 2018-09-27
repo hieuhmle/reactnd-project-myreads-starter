@@ -3,7 +3,7 @@ import Shelf from './Shelf';
 import { Link } from 'react-router-dom';
 
 const BookCase = (props) => {
-    const { books, onChangeShelf } = props;
+    const { books, onShelfChange } = props;
 
     const shelves = [
         {id: 'wantToRead', title: 'Want To Read'},
@@ -19,7 +19,7 @@ const BookCase = (props) => {
         return shelves.map(shelf => (
             <li key={shelf.id}>
                 <Shelf 
-                    onChangeShelf={(event, book) => onChangeShelf(event, book)}
+                    onShelfChange={(event, book) => onShelfChange(event, book)}
                     title={shelf.title}
                     books={filterBooksByShelf(shelf.id)}
                 />

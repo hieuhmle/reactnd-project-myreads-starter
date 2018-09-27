@@ -10,18 +10,26 @@ class App extends Component {
     state = {
         books: [],
         query: '',
-        searchResults: []
     }
 
     componentDidMount () {
-        BooksAPI.getAll().then(books => this.setState({books}));
+        this.setDefaultState();
     }
 
-    onChangeShelf (event, book) {
+    setDefaultState () {
+        BooksAPI.getAll().then(books => this.setState({books, query:''}));
+    }
+
+    onShelfChange (event, book) {
         const newShelf = event.target.value;
         BooksAPI.update(book, newShelf)
-            .then(() => BooksAPI.getAll())
-            .then(books => this.setState({books}));
+            .then(() => {
+                if (this.state.query.length) {
+                    this.searchBooks(this.state.query);
+                } else {
+                    BooksAPI.getAll().then(books => this.setState({books}))
+                }
+            })
     }
 
     onQueryChange (event) {
@@ -30,36 +38,32 @@ class App extends Component {
 
     searchBooks (query) {
         if (query.length) {
-            BooksAPI.search(query).then(books => this.setState({searchResults: books}));
+            BooksAPI.search(query).then(books => this.setState({books}));
         } else {
-            this.setState({searchResults: []})
+            this.setState({books: []})
         }
-    }
-
-    resetQuery () {
-        this.setState({query: '', searchResults: []})
     }
 
     render () {
         // BooksAPI.getAll().then(books => console.log(books));
         // BooksAPI.search('React').then(books => console.log(books));
-        const { books, query, searchResults } = this.state;
+        const { books, query } = this.state;
 
         return (
             <div>
                 <Route exact path='/' render={() => (
                     <BookCase 
                         books={books} 
-                        onChangeShelf={(event, book) => this.onChangeShelf(event, book)}
+                        onShelfChange={(event, book) => this.onShelfChange(event, book)}
                     />
                 )}/>
                 <Route path='/search' render={() => (
                     <BookSearch 
                         query={query} 
-                        books={searchResults} 
+                        books={books} 
                         onQueryChange={(event) => this.onQueryChange(event)}
-                        onChangeShelf={(event, book) => this.onChangeShelf(event, book)}
-                        resetQuery={() => this.resetQuery()}
+                        onShelfChange={(event, book) => this.onShelfChange(event, book)}
+                        setDefaultState={() => this.setDefaultState()}
                     />
                 )}/> 
             </div>
