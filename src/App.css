@@ -73,6 +73,8 @@ ul {
 /* search page */
 
 .search-books-bar {
+  display: flex;
+  flex-wrap: wrap;
   position: fixed;
   width: 100%;
   top: 0;
@@ -108,7 +110,30 @@ ul {
 }
 
 .search-books-results {
-  padding: 80px 10px 20px;
+  padding: 10px 10px 20px;
+}
+
+.suggestions-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 60px 10px 20px;
+}
+
+.suggestion {
+  margin: 2px 2px;
+  padding: 0 4px;
+  border-radius: 10%;
+  background: grey;
+  color: white;
+  cursor: pointer;
+}
+
+.suggestion:hover {
+  background: green;
+}
+
+.suggestion:active {
+  background: black;
 }
 
 /* books grid */

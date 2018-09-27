@@ -1,6 +1,7 @@
 import React from 'react'; 
 import { Link } from 'react-router-dom';
 import Book from './Book';
+import Suggestions from './Suggestions'
 
 const BookSearch = (props) => {
     const { query, books, onQueryChange, onShelfChange, setDefaultState } = props;
@@ -28,6 +29,7 @@ const BookSearch = (props) => {
                     <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => onQueryChange(event.target.value)}/>
                 </div>
             </div>
+            <Suggestions onQueryChange={(query) => onQueryChange(query)}query={query}/>
             <div className="search-books-results">
                 <ol className="books-grid">
                     {renderBooks()}
