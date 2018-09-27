@@ -2,11 +2,11 @@ import React from 'react';
 import Shelf from './Shelf';
 
 const BookCase = (props) => {
-    const { books } = props;
+    const { books, onChangeShelf } = props;
 
     const shelves = [
-        {id: 'currentlyReading', title: 'Currently Reading'},
         {id: 'wantToRead', title: 'Want To Read'},
+        {id: 'currentlyReading', title: 'Currently Reading'},
         {id: 'read', title: 'read'}
     ];
 
@@ -18,6 +18,7 @@ const BookCase = (props) => {
         return shelves.map(shelf => (
             <li key={shelf.id}>
                 <Shelf 
+                    onChangeShelf={(event, book) => onChangeShelf(event, book)}
                     title={shelf.title}
                     books={filterBooksByShelf(shelf.id)}
                 />

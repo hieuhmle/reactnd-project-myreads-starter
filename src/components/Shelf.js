@@ -2,19 +2,22 @@ import React from 'react';
 import Book from './Book';
 
 const Shelf = (props) => {
-    const { title, books } = props;
+    const { title, books, onChangeShelf } = props;
 
     const renderBooks = () => {
-        return books.map(book => (
-            <li key={book.id}>
-                <Book
-                    thumbnail={book.imageLinks.thumbnail}
-                    title={book.title}
-                    authors={book.authors}
-                    shelf={book.shelf}
-                />
-            </li>
-        ))
+        if (books.length) {
+            return books.map(book => (
+                <li key={book.id}>
+                    <Book
+                        onChangeShelf={(event, book) => onChangeShelf(event, book)}
+                        book={book}
+                    />
+                </li>
+            ));
+        }
+        else {
+            return <p className='no-book'>No Books To Show</p>
+        }
     }
 
     return (

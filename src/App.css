@@ -66,6 +66,10 @@ ul {
   font-size: 0;
 }
 
+.no-book {
+  color: grey;
+}
+
 /* search page */
 
 .search-books-bar {
