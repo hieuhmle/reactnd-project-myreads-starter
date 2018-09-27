@@ -5,7 +5,6 @@ const Book = (props) => {
     const thumbnail = book.imageLinks.thumbnail;
     const { title, authors, shelf } = book
 
-
     return (
         <div className="book">
             <div className="book-top">
@@ -21,7 +20,7 @@ const Book = (props) => {
                 </div>
             </div>
             <div className="book-title">{title}</div>
-            <div className="book-authors">{authors.reduce((str, author) => str + author + '\n')}</div>
+            <div className="book-authors">{authors ? authors.reduce((str, author) => str + author + '\n') : ''}</div>
         </div>
     );
 }
