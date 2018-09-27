@@ -3,7 +3,7 @@ import Shelf from './Shelf';
 import { Link } from 'react-router-dom';
 
 const BookCase = (props) => {
-    const { books, onShelfChange } = props;
+    const { books, onShelfChange, setSearchState } = props;
 
     const shelves = [
         {id: 'wantToRead', title: 'Want To Read'},
@@ -38,7 +38,7 @@ const BookCase = (props) => {
                 </ul>
             </div>
             <div className="open-search">
-                <Link to='/search'></Link>
+                <Link to='/search' onClick={() => setSearchState()}></Link>
             </div>
         </div>
     );

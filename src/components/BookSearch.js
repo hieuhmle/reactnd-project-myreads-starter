@@ -4,10 +4,10 @@ import Book from './Book';
 import Suggestions from './Suggestions'
 
 const BookSearch = (props) => {
-    const { query, books, onQueryChange, onShelfChange, setDefaultState } = props;
+    const { query, books, onQueryChange, onShelfChange, setHomeState } = props;
 
     const renderBooks = () => {
-        if (query.length) {
+        if (books.length) {
             return books.map(book => (
                 <li key={book.id}>
                     <Book
@@ -24,7 +24,7 @@ const BookSearch = (props) => {
     return (
         <div className="search-books">
             <div className="search-books-bar">
-                <Link className="close-search" to='/' onClick={() => setDefaultState()}>Close</Link>
+                <Link className="close-search" to='/' onClick={() => setHomeState()}>Close</Link>
                 <div className="search-books-input-wrapper">
                     <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => onQueryChange(event.target.value)}/>
                 </div>

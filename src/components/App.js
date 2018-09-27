@@ -13,11 +13,20 @@ class App extends Component {
     }
 
     componentDidMount () {
-        this.setDefaultState();
+        const path = window.location.pathname;
+        if (path === '/') {
+            this.setHomeState();
+        } else if (path === '/search') {
+            this.setSearchState();
+        }      
     }
 
-    setDefaultState () {
+    setHomeState () {
         BooksAPI.getAll().then(books => this.setState({books, query:''}));
+    }
+
+    setSearchState () {
+        this.setState({books: [], query: ''})
     }
 
     onShelfChange (event, book) {
@@ -59,6 +68,7 @@ class App extends Component {
                     <BookCase 
                         books={books} 
                         onShelfChange={(event, book) => this.onShelfChange(event, book)}
+                        setSearchState={() => this.setSearchState()}
                     />
                 )}/>
                 <Route path='/search' render={() => (
@@ -67,7 +77,7 @@ class App extends Component {
                         books={books} 
                         onQueryChange={(event) => this.onQueryChange(event)}
                         onShelfChange={(event, book) => this.onShelfChange(event, book)}
-                        setDefaultState={() => this.setDefaultState()}
+                        setHomeState={() => this.setHomeState()}
                     />
                 )}/> 
             </div>
