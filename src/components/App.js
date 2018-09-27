@@ -42,7 +42,7 @@ class App extends Component {
     }
 
     onQueryChange (query) {
-        this.setState({query}, () => this.searchBooks(this.state.query));
+        this.setState({query}, () => {this.searchBooks(this.state.query); console.log(query)});
     }
 
     searchBooks (query) {
@@ -78,6 +78,7 @@ class App extends Component {
                         onQueryChange={(event) => this.onQueryChange(event)}
                         onShelfChange={(event, book) => this.onShelfChange(event, book)}
                         setHomeState={() => this.setHomeState()}
+                        setSearchState={() => this.setSearchState()}
                     />
                 )}/> 
             </div>

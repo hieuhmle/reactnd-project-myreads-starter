@@ -4,7 +4,7 @@ import Book from './Book';
 import Suggestions from './Suggestions'
 
 const BookSearch = (props) => {
-    const { query, books, onQueryChange, onShelfChange, setHomeState } = props;
+    const { query, books, onQueryChange, onShelfChange, setHomeState, setSearchState } = props;
 
     const renderBooks = () => {
         if (books.length) {
@@ -26,8 +26,20 @@ const BookSearch = (props) => {
             <div className="search-books-bar">
                 <Link className="close-search" to='/' onClick={() => setHomeState()}>Close</Link>
                 <div className="search-books-input-wrapper">
-                    <input type="text" placeholder="Search by title or author" value={query} onChange={(event) => onQueryChange(event.target.value)}/>
+                    <input 
+                        id="search-input" 
+                        type="text" 
+                        placeholder="Search by title or author" 
+                        value={query} 
+                        onChange={(event) => onQueryChange(event.target.value)}
+                        onKeyDown={(e) => {
+                            if (e.keyCode === 8 && !query.length) {
+                                setSearchState();
+                            }
+                          }}
+                    />
                 </div>
+                <div className="clear-search" onClick={() => setSearchState()}></div>
             </div>
             <Suggestions onQueryChange={(query) => onQueryChange(query)}query={query}/>
             <div className="search-books-results">

@@ -8,7 +8,7 @@ const BookCase = (props) => {
     const shelves = [
         {id: 'wantToRead', title: 'Want To Read'},
         {id: 'currentlyReading', title: 'Currently Reading'},
-        {id: 'read', title: 'read'}
+        {id: 'read', title: 'Read'}
     ];
 
     const filterBooksByShelf = (shelf) => {
