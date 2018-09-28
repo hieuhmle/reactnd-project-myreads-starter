@@ -13,8 +13,12 @@ const Suggestions = (props) => {
     'Virtual Reality', 'Web Development', 'iOS']
 
     const { query, onQueryChange } = props;
+
     const suggestions = allSuggestions.filter(suggestion => suggestion.toLowerCase().includes(query.toLowerCase()));
 
+    /**
+     * @description render <Suggestion/> component
+     */
     const renderSuggestions = () => {
         return suggestions.map(suggestion => 
             <Suggestion 

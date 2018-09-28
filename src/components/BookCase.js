@@ -11,10 +11,17 @@ const BookCase = (props) => {
         {id: 'read', title: 'Read'}
     ];
 
+    /**
+     * @description get books from an exact shelf
+     * @param {string} shelf
+     */
     const filterBooksByShelf = (shelf) => {
         return books.filter(book => book.shelf === shelf);
     }
 
+    /**
+     * @description render <Shelf/> components
+     */
     const renderShelves = () => {
         return shelves.map(shelf => (
             <li key={shelf.id}>

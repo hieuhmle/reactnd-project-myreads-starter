@@ -6,6 +6,9 @@ import Suggestions from './Suggestions'
 const BookSearch = (props) => {
     const { query, books, onQueryChange, onShelfChange, setHomeState, setSearchState } = props;
 
+    /**
+     * @description render <Book/> component
+     */
     const renderBooks = () => {
         if (books.length) {
             return books.map(book => (

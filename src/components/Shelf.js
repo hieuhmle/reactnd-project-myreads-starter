@@ -4,6 +4,9 @@ import Book from './Book';
 const Shelf = (props) => {
     const { title, books, onShelfChange } = props;
 
+    /**
+     * @description render <Book/> component
+     */
     const renderBooks = () => {
         if (books.length) {
             return books.map(book => (

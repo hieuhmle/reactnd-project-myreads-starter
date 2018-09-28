@@ -12,6 +12,7 @@ class App extends Component {
         query: '',
     }
 
+    // Set states according to paths
     componentDidMount () {
         const path = window.location.pathname;
         if (path === '/') {
@@ -21,14 +22,25 @@ class App extends Component {
         }      
     }
 
+    /**
+     * @description Set books on shelf as App state
+     */
     setHomeState () {
         BooksAPI.getAll().then(books => this.setState({books, query:''}));
     }
 
+    /**
+     * @description Set empty books array and empty string as App state
+     */
     setSearchState () {
         this.setState({books: [], query: ''})
     }
 
+    /**
+     * @description Check if searched books are on shelf. If yes, update the shelf property on the books on shelf
+     * @param {array} books - Arrays of searched books
+     * @returns {array} Arrays of searched books with shelf property
+     */
     checkOnShelf(books) {
         return BooksAPI.getAll()
             .then(function(savedBooks) {
@@ -43,6 +55,11 @@ class App extends Component {
             })
     }
 
+    /**
+     * @description Update shelf of a book when user move the book to another shelf
+     * @param {object} event - Search input onChange event
+     * @param {obj} book - The book to be moved
+     */
     onShelfChange (event, book) {
         const newShelf = event.target.value;
         BooksAPI.update(book, newShelf)
@@ -55,10 +72,18 @@ class App extends Component {
             })
     }
 
+    /**
+     * @description Update query state then call searchBooks function
+     * @param {string} query
+     */
     onQueryChange (query) {
-        this.setState({query}, () => {this.searchBooks(this.state.query); console.log(query)});
+        this.setState({query}, () => this.searchBooks(this.state.query));
     }
 
+    /**
+     * @description Search books by query then update state accordingly
+     * @param {string} query
+     */
     searchBooks (query) {
         if (query.length) {
             BooksAPI.search(query).then(books => {
