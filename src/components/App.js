@@ -29,6 +29,20 @@ class App extends Component {
         this.setState({books: [], query: ''})
     }
 
+    checkOnShelf(books) {
+        return BooksAPI.getAll()
+            .then(function(savedBooks) {
+                for (let i = 0; i < books.length; i++) {
+                    for (let j = 0; j < savedBooks.length; j++) {
+                        if (books[i].id === savedBooks[j].id) {
+                            books[i].shelf = savedBooks[j].shelf;
+                        }
+                    }
+                }
+                return books;
+            })
+    }
+
     onShelfChange (event, book) {
         const newShelf = event.target.value;
         BooksAPI.update(book, newShelf)
@@ -49,9 +63,9 @@ class App extends Component {
         if (query.length) {
             BooksAPI.search(query).then(books => {
                 if (books[0]) {
-                    this.setState({books});
+                    this.checkOnShelf(books).then(books => this.setState({books}));
                 } else {
-                    this.setState({books: []})
+                    this.setState({books: []});
                 }
             });
         } else {
